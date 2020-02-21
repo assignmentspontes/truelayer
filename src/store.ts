@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from "redux";
+import { todo } from "./reducers";
 
-const rootReducer = combineReducers({ noop: () => {} });
+const rootReducer = combineReducers({ todo });
 
 export default createStore(
   rootReducer,
