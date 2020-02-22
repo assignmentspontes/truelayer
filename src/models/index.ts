@@ -1,3 +1,5 @@
+import { TodoAction } from "../actions/todo";
+
 export class Todo {
   constructor(
     readonly id: number,
@@ -12,6 +14,11 @@ export interface TodoState {
   readonly idCounter: number;
 }
 
+export interface RecorderState {
+  readonly recording: boolean;
+  readonly actions: TodoAction[];
+}
 export interface State {
   readonly todo: TodoState;
+  readonly recorder: RecorderState;
 }

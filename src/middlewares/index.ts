@@ -1,14 +1,17 @@
 import { Middleware, MiddlewareAPI, Dispatch } from "redux";
 import { TodoAction } from "../actions/todo";
 import * as TodoConstants from "../actions/todo/contants";
+import { storeAction } from "../actions/recorder";
 
 export function recorder() {
-  const recorderMiddleware: Middleware = ({ getState }: MiddlewareAPI) => (
+  const recorderMiddleware: Middleware = (store: MiddlewareAPI) => (
     next: Dispatch
   ) => action => {
     console.log("will dispatch", action);
 
-    console.log(isTodoAction(action));
+    if (isTodoAction(action)) {
+      store.dispatch(storeAction(action));
+    }
 
     return next(action);
   };

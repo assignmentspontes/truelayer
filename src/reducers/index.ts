@@ -1,11 +1,13 @@
 import produce, { Draft } from "immer";
-import { TodoState, Todo } from "../models";
+import { TodoState, Todo, RecorderState } from "../models";
 import { TodoAction } from "../actions/todo";
 import {
   CREATE_TODO,
   UPDATE_TODO,
   DELETE_TODO
 } from "../actions/todo/contants";
+import { RecorderAction } from "../actions/recorder";
+import { STORE_ACTION } from "../actions/recorder/constants";
 
 export const todo = produce(
   (draft: Draft<TodoState>, action: TodoAction) => {
@@ -42,4 +44,17 @@ export const todo = produce(
     }
   },
   { data: [], idCounter: 0 }
+);
+
+export const recorder = produce(
+  (draft: Draft<RecorderState>, action: RecorderAction) => {
+    switch (action.type) {
+      case STORE_ACTION:
+        if (!draft.recording) return;
+
+        draft.actions.push(action.todoAction);
+        break;
+    }
+  },
+  { recording: false, actions: [] }
 );
