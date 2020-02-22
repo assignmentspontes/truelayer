@@ -1,5 +1,6 @@
 export const CREATE_TODO = "CREATE_TODO";
 export const UPDATE_TODO = "UPDATE_TODO";
+export const DELETE_TODO = "DELETE_TODO";
 
 interface CreateTodoAction {
   type: typeof CREATE_TODO;
@@ -12,6 +13,11 @@ interface UpdateTodoAction {
   id: number;
   name: string;
   description: string;
+}
+
+interface DeleteTodoAction {
+  type: typeof DELETE_TODO;
+  id: number;
 }
 
 export function createTodo(
@@ -38,4 +44,14 @@ export function updateTodo(
   };
 }
 
-export type TodoActions = CreateTodoAction | UpdateTodoAction;
+export function deleteTodo(id: number): DeleteTodoAction {
+  return {
+    type: DELETE_TODO,
+    id
+  };
+}
+
+export type TodoActions =
+  | CreateTodoAction
+  | UpdateTodoAction
+  | DeleteTodoAction;
