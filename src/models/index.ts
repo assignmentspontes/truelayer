@@ -9,6 +9,7 @@ export class Todo {
 
 export interface TodoState {
   readonly data: Todo[];
+  readonly idCounter: number;
 }
 
 export interface State {

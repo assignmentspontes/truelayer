@@ -3,7 +3,7 @@ import { TodoList } from "./TodoList";
 import { State } from "../models";
 import { useSelector, useDispatch } from "react-redux";
 import { EditTodo } from "./EditTodo";
-import { createTodo } from "../actions";
+import { createTodo, updateTodo } from "../actions";
 
 export const Todos: React.FC = () => {
   const todos = useSelector((state: State) => state.todo.data);
@@ -13,9 +13,12 @@ export const Todos: React.FC = () => {
     <div>
       <EditTodo
         edit={false}
-        onUpdated={(name, desc) => dispatch(createTodo(name, desc))}
+        onSave={(name, desc) => dispatch(createTodo(name, desc))}
       ></EditTodo>
-      <TodoList todos={todos}></TodoList>
+      <TodoList
+        todos={todos}
+        onUpdateTodo={(id, name, desc) => dispatch(updateTodo(id, name, desc))}
+      ></TodoList>
     </div>
   );
 };

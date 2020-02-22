@@ -2,8 +2,10 @@ import React, { useRef } from "react";
 
 export const EditTodo: React.FC<{
   edit: boolean;
-  onUpdated: (name: string, description: string) => {};
-}> = ({ edit, onUpdated }) => {
+  name?: string;
+  description?: string;
+  onSave: (name: string, description: string) => void;
+}> = ({ edit, name, description, onSave: onUpdated }) => {
   const nameRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
@@ -18,9 +20,9 @@ export const EditTodo: React.FC<{
 
   return (
     <form onSubmit={onSubmit}>
-      <input type="text" ref={nameRef} />
+      <input type="text" ref={nameRef} defaultValue={name} />
       <br />
-      <textarea ref={descriptionRef}></textarea>
+      <textarea ref={descriptionRef} defaultValue={description}></textarea>
       <button>{edit ? "Edit Todo" : "Add Todo"}</button>
     </form>
   );
