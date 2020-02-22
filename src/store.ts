@@ -1,10 +1,13 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { todo } from "./reducers";
+import { recorder } from "./middlewares";
 
 const rootReducer = combineReducers({ todo });
 
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export default createStore(
   rootReducer,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(recorder()))
 );

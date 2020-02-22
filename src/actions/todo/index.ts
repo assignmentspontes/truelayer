@@ -1,6 +1,4 @@
-export const CREATE_TODO = "CREATE_TODO";
-export const UPDATE_TODO = "UPDATE_TODO";
-export const DELETE_TODO = "DELETE_TODO";
+import { CREATE_TODO, UPDATE_TODO, DELETE_TODO } from "./contants";
 
 interface CreateTodoAction {
   type: typeof CREATE_TODO;
@@ -51,7 +49,4 @@ export function deleteTodo(id: number): DeleteTodoAction {
   };
 }
 
-export type TodoActions =
-  | CreateTodoAction
-  | UpdateTodoAction
-  | DeleteTodoAction;
+export type TodoAction = CreateTodoAction | UpdateTodoAction | DeleteTodoAction;

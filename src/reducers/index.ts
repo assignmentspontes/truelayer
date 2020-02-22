@@ -1,9 +1,14 @@
 import produce, { Draft } from "immer";
 import { TodoState, Todo } from "../models";
-import { TodoActions, CREATE_TODO, UPDATE_TODO, DELETE_TODO } from "../actions";
+import { TodoAction } from "../actions/todo";
+import {
+  CREATE_TODO,
+  UPDATE_TODO,
+  DELETE_TODO
+} from "../actions/todo/contants";
 
 export const todo = produce(
-  (draft: Draft<TodoState>, action: TodoActions) => {
+  (draft: Draft<TodoState>, action: TodoAction) => {
     switch (action.type) {
       case CREATE_TODO:
         draft.data.push(
