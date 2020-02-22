@@ -1,4 +1,4 @@
-import { CREATE_TODO, UPDATE_TODO, DELETE_TODO } from "./contants";
+import { CREATE_TODO, UPDATE_TODO, DELETE_TODO, CLEAR_TODOS } from "./contants";
 
 interface CreateTodoAction {
   type: typeof CREATE_TODO;
@@ -16,6 +16,10 @@ interface UpdateTodoAction {
 interface DeleteTodoAction {
   type: typeof DELETE_TODO;
   id: number;
+}
+
+interface ClearTodosAction {
+  type: typeof CLEAR_TODOS;
 }
 
 export function createTodo(
@@ -49,4 +53,14 @@ export function deleteTodo(id: number): DeleteTodoAction {
   };
 }
 
-export type TodoAction = CreateTodoAction | UpdateTodoAction | DeleteTodoAction;
+export function clearTodos(): ClearTodosAction {
+  return {
+    type: CLEAR_TODOS
+  };
+}
+
+export type TodoAction =
+  | CreateTodoAction
+  | UpdateTodoAction
+  | DeleteTodoAction
+  | ClearTodosAction;

@@ -4,7 +4,8 @@ import { TodoAction } from "../actions/todo";
 import {
   CREATE_TODO,
   UPDATE_TODO,
-  DELETE_TODO
+  DELETE_TODO,
+  CLEAR_TODOS
 } from "../actions/todo/contants";
 import { RecorderAction } from "../actions/recorder";
 import {
@@ -46,6 +47,11 @@ export const todo = produce(
           draft.data.splice(idx, 1);
         }
 
+        break;
+
+      case CLEAR_TODOS:
+        draft.idCounter = 0;
+        draft.data = [];
         break;
     }
   },
