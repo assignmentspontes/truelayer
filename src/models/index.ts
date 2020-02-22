@@ -8,7 +8,7 @@ export class Todo {
 }
 
 export interface TodoState {
-  readonly data: readonly Todo[];
+  readonly data: Todo[];
 }
 
 export interface State {
