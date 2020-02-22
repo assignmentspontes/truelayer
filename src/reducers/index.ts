@@ -7,7 +7,12 @@ import {
   DELETE_TODO
 } from "../actions/todo/contants";
 import { RecorderAction } from "../actions/recorder";
-import { STORE_ACTION } from "../actions/recorder/constants";
+import {
+  STORE_ACTION,
+  START_RECORDING,
+  STOP_RECORDING,
+  TOGGLE_RECORDING
+} from "../actions/recorder/constants";
 
 export const todo = produce(
   (draft: Draft<TodoState>, action: TodoAction) => {
@@ -53,6 +58,18 @@ export const recorder = produce(
         if (!draft.recording) return;
 
         draft.actions.push(action.todoAction);
+        break;
+
+      case START_RECORDING:
+        draft.recording = true;
+        break;
+
+      case STOP_RECORDING:
+        draft.recording = false;
+        break;
+
+      case TOGGLE_RECORDING:
+        draft.recording = !draft.recording;
         break;
     }
   },
