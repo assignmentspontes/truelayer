@@ -11,7 +11,8 @@ import {
   STORE_ACTION,
   START_RECORDING,
   STOP_RECORDING,
-  TOGGLE_RECORDING
+  TOGGLE_RECORDING,
+  CLEAR_RECORDING
 } from "../actions/recorder/constants";
 
 export const todo = produce(
@@ -70,6 +71,11 @@ export const recorder = produce(
 
       case TOGGLE_RECORDING:
         draft.recording = !draft.recording;
+        break;
+
+      case CLEAR_RECORDING:
+        draft.recording = false;
+        draft.actions = [];
         break;
     }
   },
