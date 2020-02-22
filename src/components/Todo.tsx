@@ -8,7 +8,7 @@ export const Todo: React.FC<TodoModel> = ({
 }) => {
   return (
     <div>
-      <span>{name}</span> <span>{creationDate}</span>
+      <span>{name}</span> <span>{creationDate.toLocaleDateString()}</span>
       <br />
       <span>{description}</span>
     </div>
