@@ -5,9 +5,11 @@ import { TodoView } from "./TodoView";
 
 export const Todo: React.FC<{
   todo: TodoModel;
+  canDelete: boolean;
+  canEdit: boolean;
   onUpdate: (id: number, name: string, description: string) => void;
   onDelete: (id: number) => void;
-}> = ({ todo, onUpdate, onDelete }) => {
+}> = ({ todo, canEdit, canDelete, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const visibleElement = isEditing ? (
     <EditTodo
@@ -22,8 +24,12 @@ export const Todo: React.FC<{
   ) : (
     <div>
       <TodoView {...todo}></TodoView>
-      <button onClick={() => setIsEditing(true)}>Edit</button>
-      <button onClick={() => onDelete(todo.id)}>Delete</button>
+      <button onClick={() => setIsEditing(true)} disabled={!canEdit}>
+        Edit
+      </button>
+      <button onClick={() => onDelete(todo.id)} disabled={!canDelete}>
+        Delete
+      </button>
     </div>
   );
   return <div>{visibleElement}</div>;

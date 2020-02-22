@@ -4,7 +4,8 @@ import {
   START_RECORDING,
   STOP_RECORDING,
   TOGGLE_RECORDING,
-  CLEAR_RECORDING
+  CLEAR_RECORDING,
+  PLAY_RECORDING
 } from "./constants";
 
 interface StoreActionAction {
@@ -26,6 +27,10 @@ interface StopRecordingAction {
 
 interface ClearRecordingAction {
   type: typeof CLEAR_RECORDING;
+}
+
+interface PlayRecordingAction {
+  type: typeof PLAY_RECORDING;
 }
 
 export function storeAction(todoAction: TodoAction): StoreActionAction {
@@ -59,9 +64,16 @@ export function clearRecording(): ClearRecordingAction {
   };
 }
 
+export function playRecording(): PlayRecordingAction {
+  return {
+    type: PLAY_RECORDING
+  };
+}
+
 export type RecorderAction =
   | StoreActionAction
   | StartRecordingAction
   | StopRecordingAction
   | TogggleRecordingAction
-  | ClearRecordingAction;
+  | ClearRecordingAction
+  | PlayRecordingAction;

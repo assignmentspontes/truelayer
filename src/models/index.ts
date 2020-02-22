@@ -16,8 +16,10 @@ export interface TodoState {
 
 export interface RecorderState {
   readonly recording: boolean;
+  readonly playing: boolean;
   readonly actions: TodoAction[];
 }
+
 export interface State {
   readonly todo: TodoState;
   readonly recorder: RecorderState;

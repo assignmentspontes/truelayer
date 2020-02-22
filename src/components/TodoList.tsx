@@ -4,15 +4,19 @@ import { Todo } from "./Todo";
 
 export const TodoList: React.FC<{
   todos: TodoModel[];
+  canDeleteTodo: boolean;
+  canEditTodo: boolean;
   onUpdateTodo: (id: number, name: string, description: string) => void;
   onDeleteTodo: (id: number) => void;
-}> = ({ todos, onUpdateTodo, onDeleteTodo }) => {
+}> = ({ todos, canDeleteTodo, canEditTodo, onUpdateTodo, onDeleteTodo }) => {
   return (
     <div>
       {todos.map(t => (
         <Todo
           key={t.id}
           todo={t}
+          canEdit={canEditTodo}
+          canDelete={canDeleteTodo}
           onUpdate={onUpdateTodo}
           onDelete={onDeleteTodo}
         ></Todo>

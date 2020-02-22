@@ -13,7 +13,8 @@ import {
   START_RECORDING,
   STOP_RECORDING,
   TOGGLE_RECORDING,
-  CLEAR_RECORDING
+  CLEAR_RECORDING,
+  PLAY_RECORDING
 } from "../actions/recorder/constants";
 
 export const todo = produce(
@@ -79,8 +80,13 @@ export const recorder = produce(
         draft.recording = !draft.recording;
         break;
 
+      case PLAY_RECORDING:
+        draft.playing = true;
+        break;
+
       case CLEAR_RECORDING:
         draft.recording = false;
+        draft.playing = false;
         draft.actions = [];
         break;
     }
