@@ -52,6 +52,11 @@ export const todo = produce((draft: Draft<TodoState>, action: TodoAction) => {
 
 const recordedActions = localStorage.getItem("recordedActions");
 const initialActions = recordedActions ? JSON.parse(recordedActions) : [];
+const recorderInitialState: RecorderState = {
+  recording: false,
+  playing: false,
+  actions: initialActions
+};
 
 export const recorder = produce(
   (draft: Draft<RecorderState>, action: RecorderAction) => {
@@ -80,5 +85,5 @@ export const recorder = produce(
         break;
     }
   },
-  { recording: false, actions: initialActions }
+  recorderInitialState
 );

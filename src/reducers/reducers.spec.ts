@@ -1,12 +1,13 @@
-import produce from "immer";
-import { todo } from "./index";
+import { todo, recorder } from "./index";
 import {
   CREATE_TODO,
   UPDATE_TODO,
   DELETE_TODO,
   CLEAR_TODOS
 } from "../actions/todo/contants";
-import { Todo, TodoState } from "../models/index";
+import { Todo, TodoState, RecorderState } from "../models/index";
+import { STORE_ACTION, CLEAR_RECORDING } from "../actions/recorder/constants";
+import { CreateTodoAction } from "../actions/todo/types";
 
 // Getting hit by this bug so comparisons are more verbose: https://github.com/facebook/jest/issues/9531
 
@@ -84,5 +85,106 @@ describe("todo reducer", () => {
 
     expect(result.idCounter).toBe(0);
     expect(result.data.length).toBe(0);
+  });
+});
+
+describe("recorder reducer", () => {
+  const setItemSpy = jest.spyOn(Storage.prototype, "setItem");
+  const removeItemSpy = jest.spyOn(Storage.prototype, "removeItem");
+
+  beforeEach(() => {
+    setItemSpy.mockClear();
+    removeItemSpy.mockClear();
+  });
+
+  test("returns initial state on undefined", () => {
+    const result = recorder(undefined, { type: "@@INIT" } as any);
+
+    expect(result).toEqual({ recording: false, playing: false, actions: [] });
+  });
+
+  test("handles STORE_RECORDING when recording", () => {
+    const initialState: RecorderState = {
+      recording: true,
+      playing: false,
+      actions: []
+    };
+
+    const todoAction: CreateTodoAction = {
+      type: CREATE_TODO,
+      description: "desc",
+      name: "name"
+    };
+
+    const result = recorder(initialState, {
+      type: STORE_ACTION,
+      todoAction
+    });
+
+    expect(result).toEqual({
+      recording: true,
+      playing: false,
+      actions: [todoAction]
+    });
+
+    expect(setItemSpy.mock.calls.length).toBe(1);
+    expect(setItemSpy.mock.calls[0]).toEqual([
+      "recordedActions",
+      JSON.stringify([todoAction])
+    ]);
+  });
+
+  test("handles STORE_RECORDING when not recording", () => {
+    const initialState: RecorderState = {
+      recording: false,
+      playing: false,
+      actions: []
+    };
+
+    const todoAction: CreateTodoAction = {
+      type: CREATE_TODO,
+      description: "desc",
+      name: "name"
+    };
+
+    const result = recorder(initialState, {
+      type: STORE_ACTION,
+      todoAction
+    });
+
+    expect(result).toEqual({
+      recording: false,
+      playing: false,
+      actions: []
+    });
+
+    expect(setItemSpy.mock.calls.length).toBe(0);
+  });
+
+  test("handles CLEAR_RECORDING", () => {
+    const initialState: RecorderState = {
+      recording: false,
+      playing: true,
+      actions: [
+        {
+          type: CREATE_TODO,
+          description: "desc",
+          name: "name"
+        }
+      ]
+    };
+
+    const result = recorder(initialState, {
+      type: CLEAR_RECORDING
+    });
+
+    expect(result).toEqual({
+      recording: false,
+      playing: false,
+      actions: []
+    });
+
+    expect(removeItemSpy.mock.calls.length).toBe(1);
+    expect(removeItemSpy.mock.calls[0]).toEqual(["recordedActions"]);
   });
 });
