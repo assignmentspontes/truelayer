@@ -7,7 +7,7 @@ import {
   playRecording
 } from "../actions/recorder";
 import { RecorderButtons } from "./RecorderButtons";
-import { clearTodos } from "../actions/todo";
+import { clearTodos, TodoAction } from "../actions/todo";
 
 export const Recorders: React.FC = () => {
   const isRecording = useSelector((state: State) => state.recorder.recording);
@@ -21,11 +21,15 @@ export const Recorders: React.FC = () => {
     dispatch(clearTodos());
     dispatch(playRecording());
 
+    replayActions(todoActions);
+  };
+
+  const replayActions = (todoActions: TodoAction[]) => {
     const editableTodoActions = Array.from(todoActions);
 
-    const intervalId = setInterval(() => {
+    const interval = setInterval(() => {
       if (editableTodoActions.length === 0) {
-        clearInterval(intervalId);
+        clearInterval(interval);
         dispatch(clearRecording());
         return;
       }
@@ -35,6 +39,7 @@ export const Recorders: React.FC = () => {
       dispatch(todoAction);
     }, 1000);
   };
+
   return (
     <div>
       <RecorderButtons

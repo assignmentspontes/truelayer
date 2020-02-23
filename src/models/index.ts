@@ -1,6 +1,9 @@
+import { immerable } from "immer";
 import { TodoAction } from "../actions/todo";
 
 export class Todo {
+  [immerable] = true;
+
   constructor(
     readonly id: number,
     readonly name: string,
