@@ -7,8 +7,6 @@ export function recorder() {
   const recorderMiddleware: Middleware = (store: MiddlewareAPI) => (
     next: Dispatch
   ) => action => {
-    console.log("will dispatch", action);
-
     if (isTodoAction(action)) {
       store.dispatch(storeAction(action));
     }
