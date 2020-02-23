@@ -15,47 +15,40 @@ import {
   PLAY_RECORDING
 } from "../actions/recorder/constants";
 
-export const todo = produce(
-  (draft: Draft<TodoState>, action: TodoAction) => {
-    switch (action.type) {
-      case CREATE_TODO:
-        draft.data.push(
-          new Todo(
-            draft.idCounter++,
-            action.name,
-            action.description,
-            new Date()
-          )
-        );
+const intialTodoState: TodoState = { data: [], idCounter: 0 };
+export const todo = produce((draft: Draft<TodoState>, action: TodoAction) => {
+  switch (action.type) {
+    case CREATE_TODO:
+      draft.data.push(
+        new Todo(draft.idCounter++, action.name, action.description, new Date())
+      );
 
-        break;
+      break;
 
-      case UPDATE_TODO:
-        const todo = draft.data.find(t => t.id === action.id);
-        if (todo) {
-          todo.description = action.description;
-          todo.name = action.name;
-        }
+    case UPDATE_TODO:
+      const todo = draft.data.find(t => t.id === action.id);
+      if (todo) {
+        todo.description = action.description;
+        todo.name = action.name;
+      }
 
-        break;
+      break;
 
-      case DELETE_TODO:
-        const idx = draft.data.findIndex(t => t.id === action.id);
+    case DELETE_TODO:
+      const idx = draft.data.findIndex(t => t.id === action.id);
 
-        if (idx >= 0) {
-          draft.data.splice(idx, 1);
-        }
+      if (idx >= 0) {
+        draft.data.splice(idx, 1);
+      }
 
-        break;
+      break;
 
-      case CLEAR_TODOS:
-        draft.idCounter = 0;
-        draft.data = [];
-        break;
-    }
-  },
-  { data: [], idCounter: 0 }
-);
+    case CLEAR_TODOS:
+      draft.idCounter = 0;
+      draft.data = [];
+      break;
+  }
+}, intialTodoState);
 
 const recordedActions = localStorage.getItem("recordedActions");
 const initialActions = recordedActions ? JSON.parse(recordedActions) : [];
