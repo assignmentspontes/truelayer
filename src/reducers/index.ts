@@ -10,8 +10,6 @@ import {
 import { RecorderAction } from "../actions/recorder/types";
 import {
   STORE_ACTION,
-  START_RECORDING,
-  STOP_RECORDING,
   TOGGLE_RECORDING,
   CLEAR_RECORDING,
   PLAY_RECORDING
@@ -59,6 +57,9 @@ export const todo = produce(
   { data: [], idCounter: 0 }
 );
 
+const recordedActions = localStorage.getItem("recordedActions");
+const initialActions = recordedActions ? JSON.parse(recordedActions) : [];
+
 export const recorder = produce(
   (draft: Draft<RecorderState>, action: RecorderAction) => {
     switch (action.type) {
@@ -66,14 +67,8 @@ export const recorder = produce(
         if (!draft.recording) return;
 
         draft.actions.push(action.todoAction);
-        break;
 
-      case START_RECORDING:
-        draft.recording = true;
-        break;
-
-      case STOP_RECORDING:
-        draft.recording = false;
+        localStorage.setItem("recordedActions", JSON.stringify(draft.actions));
         break;
 
       case TOGGLE_RECORDING:
@@ -88,8 +83,9 @@ export const recorder = produce(
         draft.recording = false;
         draft.playing = false;
         draft.actions = [];
+        localStorage.removeItem("recordedActions");
         break;
     }
   },
-  { recording: false, actions: [] }
+  { recording: false, actions: initialActions }
 );
