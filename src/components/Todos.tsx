@@ -3,7 +3,7 @@ import { TodoList } from "./TodoList";
 import { State } from "../models";
 import { useSelector, useDispatch } from "react-redux";
 import { EditTodo } from "./EditTodo";
-import { createTodo, updateTodo, deleteTodo } from "../actions/todo";
+import { createTodo, updateTodo, deleteTodo } from "../actions/todo/creators";
 
 export const Todos: React.FC = () => {
   const todos = useSelector((state: State) => state.todo.data);

@@ -5,9 +5,10 @@ import {
   toggleRecording,
   clearRecording,
   playRecording
-} from "../actions/recorder";
+} from "../actions/recorder/creators";
 import { RecorderButtons } from "./RecorderButtons";
-import { clearTodos, TodoAction } from "../actions/todo";
+import { clearTodos } from "../actions/todo/creators";
+import { TodoAction } from "../actions/todo/types";
 
 export const Recorders: React.FC = () => {
   const isRecording = useSelector((state: State) => state.recorder.recording);

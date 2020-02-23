@@ -1,4 +1,11 @@
-import { TodoAction } from "../todo";
+import {
+  StoreActionAction,
+  StartRecordingAction,
+  StopRecordingAction,
+  TogggleRecordingAction,
+  ClearRecordingAction,
+  PlayRecordingAction
+} from "./types";
 import {
   STORE_ACTION,
   START_RECORDING,
@@ -7,31 +14,7 @@ import {
   CLEAR_RECORDING,
   PLAY_RECORDING
 } from "./constants";
-
-interface StoreActionAction {
-  type: typeof STORE_ACTION;
-  todoAction: TodoAction;
-}
-
-interface TogggleRecordingAction {
-  type: typeof TOGGLE_RECORDING;
-}
-
-interface StartRecordingAction {
-  type: typeof START_RECORDING;
-}
-
-interface StopRecordingAction {
-  type: typeof STOP_RECORDING;
-}
-
-interface ClearRecordingAction {
-  type: typeof CLEAR_RECORDING;
-}
-
-interface PlayRecordingAction {
-  type: typeof PLAY_RECORDING;
-}
+import { TodoAction } from "../todo/types";
 
 export function storeAction(todoAction: TodoAction): StoreActionAction {
   return {
@@ -69,11 +52,3 @@ export function playRecording(): PlayRecordingAction {
     type: PLAY_RECORDING
   };
 }
-
-export type RecorderAction =
-  | StoreActionAction
-  | StartRecordingAction
-  | StopRecordingAction
-  | TogggleRecordingAction
-  | ClearRecordingAction
-  | PlayRecordingAction;

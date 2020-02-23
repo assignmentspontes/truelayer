@@ -1,13 +1,13 @@
 import produce, { Draft } from "immer";
 import { TodoState, Todo, RecorderState } from "../models";
-import { TodoAction } from "../actions/todo";
+import { TodoAction } from "../actions/todo/types";
 import {
   CREATE_TODO,
   UPDATE_TODO,
   DELETE_TODO,
   CLEAR_TODOS
 } from "../actions/todo/contants";
-import { RecorderAction } from "../actions/recorder";
+import { RecorderAction } from "../actions/recorder/types";
 import {
   STORE_ACTION,
   START_RECORDING,

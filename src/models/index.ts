@@ -1,5 +1,5 @@
 import { immerable } from "immer";
-import { TodoAction } from "../actions/todo";
+import { TodoAction } from "../actions/todo/types";
 
 export class Todo {
   [immerable] = true;

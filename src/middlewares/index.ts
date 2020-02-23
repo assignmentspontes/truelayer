@@ -1,7 +1,7 @@
 import { Middleware, MiddlewareAPI, Dispatch } from "redux";
-import { TodoAction } from "../actions/todo";
+import { TodoAction } from "../actions/todo/types";
 import * as TodoConstants from "../actions/todo/contants";
-import { storeAction } from "../actions/recorder";
+import { storeAction } from "../actions/recorder/creators";
 
 export function recorder() {
   const recorderMiddleware: Middleware = (store: MiddlewareAPI) => (
