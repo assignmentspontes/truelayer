@@ -19,7 +19,6 @@ export const Todos: React.FC = () => {
         canEdit={!isPlayingRecording}
         onSave={(name, desc) => dispatch(createTodo(name, desc))}
       ></EditTodo>
-      <h2>Todos</h2>
       <TodoList
         todos={todos}
         canDeleteTodo={!isPlayingRecording}

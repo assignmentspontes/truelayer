@@ -36,5 +36,5 @@ export const Todo: React.FC<{
       </button>
     </div>
   );
-  return <div>{visibleElement}</div>;
+  return <div className="todo">{visibleElement}</div>;
 };

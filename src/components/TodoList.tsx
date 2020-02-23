@@ -10,7 +10,7 @@ export const TodoList: React.FC<{
   onDeleteTodo: (id: number) => void;
 }> = ({ todos, canDeleteTodo, canEditTodo, onUpdateTodo, onDeleteTodo }) => {
   return (
-    <div>
+    <div className="todo-list">
       {todos.map(t => (
         <Todo
           key={t.id}

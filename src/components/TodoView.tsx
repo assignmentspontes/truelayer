@@ -8,9 +8,11 @@ export const TodoView: React.FC<TodoModel> = ({
 }) => {
   return (
     <div>
-      <span>{name}</span> <span>{creationDate.toLocaleDateString()}</span>
-      <br />
-      <span>{description}</span>
+      <span className="date">
+        {creationDate.toLocaleDateString()} {creationDate.toLocaleTimeString()}
+      </span>
+      <span className="name">{name}</span>
+      <span className="description">{description}</span>
     </div>
   );
 };

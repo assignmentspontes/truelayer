@@ -6,8 +6,9 @@ import { Recorders } from "./components/Recorders";
 function App() {
   return (
     <div className="app">
-      <Todos></Todos>
       <Recorders></Recorders>
+      <hr />
+      <Todos></Todos>
     </div>
   );
 }
