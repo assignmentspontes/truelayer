@@ -23,17 +23,19 @@ export const EditTodo: React.FC<{
     <form onSubmit={onSubmit}>
       <input
         type="text"
+        placeholder="Title"
         ref={nameRef}
         defaultValue={name}
         disabled={!canEdit}
       />
       <br />
       <textarea
+        placeholder="Description"
         ref={descriptionRef}
         defaultValue={description}
         disabled={!canEdit}
       ></textarea>
-      <button disabled={!canEdit}>{edit ? "Edit Todo" : "Add Todo"}</button>
+      <button disabled={!canEdit}>{edit ? "Save" : "Add Todo"}</button>
     </form>
   );
 };

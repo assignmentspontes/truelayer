@@ -27,7 +27,11 @@ export const Todo: React.FC<{
       <button onClick={() => setIsEditing(true)} disabled={!canEdit}>
         Edit
       </button>
-      <button onClick={() => onDelete(todo.id)} disabled={!canDelete}>
+      <button
+        className="delete"
+        onClick={() => onDelete(todo.id)}
+        disabled={!canDelete}
+      >
         Delete
       </button>
     </div>

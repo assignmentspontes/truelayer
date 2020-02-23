@@ -43,6 +43,7 @@ export const Recorders: React.FC = () => {
 
   return (
     <div>
+      <h2>Record</h2>
       <RecorderButtons
         recording={isRecording}
         playing={isPlaying}
